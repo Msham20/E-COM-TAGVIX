@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tagvix — Beauty That Feels Like You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#FBF6EF;
+    --beige:#EFE4D6;
+    --white:#FFFFFF;
+    --charcoal:#2B2622;
+    --charcoal-soft:#4A433C;
+    --rose:#B4746A;
+    --rose-deep:#8C5049;
+    --rose-pale:#EBD6D0;
+    --line:#E3D8C9;
+    --radius:6px;
+    --max:1320px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--ivory); color:var(--charcoal); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+  h1,h2,h3,.serif{ font-family:'Fraunces',serif; font-weight:500; letter-spacing:-0.01em; color:var(--charcoal);}
+  a{color:inherit; text-decoration:none; cursor:pointer;}
+  img{display:block; width:100%; height:100%; object-fit:cover;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 40px;}
+  .eyebrow{ font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--rose-deep); font-weight:600;}
+  button{font-family:'Inter',sans-serif; cursor:pointer; border:none; background:none; color:inherit;}
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 30px; font-size:12px; letter-spacing:0.13em; text-transform:uppercase; font-weight:600; border-radius:var(--radius); transition:all .2s ease; white-space:nowrap;}
+  .btn-primary{ background:var(--charcoal); color:var(--ivory);}
+  .btn-primary:hover{ background:var(--rose-deep);}
+  .btn-primary:disabled{ opacity:.45; cursor:not-allowed;}
+  .btn-outline{ background:transparent; color:var(--charcoal); border:1px solid var(--charcoal);}
+  .btn-outline:hover{ background:var(--charcoal); color:var(--ivory);}
+  .btn-ghost{ background:transparent; color:var(--white); border:1px solid rgba(255,255,255,0.6);}
+  .btn-ghost:hover{ background:var(--white); color:var(--charcoal);}
+  .btn-sm{ padding:9px 16px; font-size:10.5px;}
+  input,select,textarea{ font-family:'Inter',sans-serif; font-size:13.5px; padding:12px 14px; border:1px solid var(--line); border-radius:var(--radius); background:var(--white); color:var(--charcoal); width:100%;}
+  input:focus,select:focus,textarea:focus{ outline:2px solid var(--rose-deep); outline-offset:-1px;}
+  label{ font-size:11.5px; font-weight:600; letter-spacing:0.03em; color:var(--charcoal-soft); display:block; margin-bottom:6px;}
+
+  /* ---------- Announcement Bar ---------- */
+  .announce{ background:var(--charcoal); color:var(--ivory); text-align:center; font-size:11.5px; letter-spacing:0.08em; padding:10px 20px; overflow:hidden;}
+  .announce-track{ display:flex; gap:60px; animation: slide 16s linear infinite; width:max-content;}
+  .announce-track span{ opacity:0.92; white-space:nowrap;}
+  @keyframes slide{ 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+
+  /* ---------- Header ---------- */
+  header{ position:sticky; top:0; z-index:100; background:rgba(251,246,239,0.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 40px; max-width:var(--max); margin:0 auto; gap:20px;}
+  .logo{ font-family:'Fraunces',serif; font-size:24px; letter-spacing:0.06em; font-weight:500; flex-shrink:0;}
+  .nav-links{ display:flex; gap:30px; font-size:13px; letter-spacing:0.02em; font-weight:500;}
+  .nav-links a{ position:relative; padding:4px 0;}
+  .nav-links a::after{ content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:var(--rose-deep); transition:width .25s;}
+  .nav-links a:hover::after,.nav-links a.active::after{ width:100%;}
+  .nav-links a.active{ color:var(--rose-deep);}
+  .nav-search{ position:relative; flex:1; max-width:260px;}
+  .nav-search input{ padding:9px 14px 9px 34px; font-size:12.5px; border-radius:20px;}
+  .nav-search svg{ position:absolute; left:11px; top:50%; transform:translateY(-50%); pointer-events:none;}
+  .search-suggest{ position:absolute; top:calc(100% + 8px); left:0; right:0; background:var(--white); border:1px solid var(--line); border-radius:var(--radius); box-shadow:0 14px 30px rgba(0,0,0,0.1); z-index:50; overflow:hidden; display:none;}
+  .search-suggest.show{ display:block;}
+  .search-suggest .s-item{ display:flex; align-items:center; gap:10px; padding:10px 12px; font-size:12.5px; border-bottom:1px solid var(--line);}
+  .search-suggest .s-item:last-child{ border-bottom:none;}
+  .search-suggest .s-item:hover{ background:var(--ivory);}
+  .s-thumb{ width:30px; height:30px; border-radius:4px; flex-shrink:0;}
+  .nav-icons{ display:flex; align-items:center; gap:20px; flex-shrink:0;}
+  .nav-icons button{ display:flex; align-items:center; position:relative;}
+  .icon-badge::after{ content:attr(data-count); position:absolute; top:-7px; right:-9px; background:var(--rose-deep); color:#fff; font-size:9px; width:15px; height:15px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:600;}
+  .icon-badge[data-count="0"]::after{ display:none;}
+  .hamburger{ display:none;}
+
+  /* ---------- Hero ---------- */
+  .hero{ position:relative; display:grid; grid-template-columns:1.1fr 1fr; min-height:600px; background:var(--beige);}
+  .hero-copy{ display:flex; flex-direction:column; justify-content:center; padding:60px 70px; gap:20px; z-index:2;}
+  .hero-copy h1{ font-size:52px; line-height:1.08; max-width:520px;}
+  .hero-copy p{ font-size:16px; line-height:1.7; color:var(--charcoal-soft); max-width:420px;}
+  .hero-ctas{ display:flex; gap:16px; margin-top:8px; flex-wrap:wrap;}
+  .hero-img{ position:relative; overflow:hidden;}
+  .hero-badge{ position:absolute; left:70px; bottom:48px; background:var(--white); padding:14px 20px; border-radius:var(--radius); box-shadow:0 18px 40px rgba(43,38,34,0.08); display:flex; gap:12px; align-items:center; max-width:280px;}
+  .hero-badge .dot{ width:34px; height:34px; border-radius:50%; background:var(--rose-pale); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:14px; color:var(--rose-deep); font-family:'Fraunces',serif;}
+  .hero-badge span{ font-size:12px; line-height:1.5; color:var(--charcoal-soft);}
+  .hero-ph{ width:100%; height:100%; background:linear-gradient(135deg,#E7CFC3,#C79B8D); display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-size:32px; color:#fff;}
+
+  /* ---------- Section titles ---------- */
+  .section{ padding:90px 0;}
+  .section-head{ display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:36px; flex-wrap:wrap; gap:16px;}
+  .section-head h2{ font-size:32px; margin-top:8px;}
+  .section-head-sub{ font-size:14px; color:var(--charcoal-soft); max-width:380px; text-align:right;}
+
+  /* ---------- Categories ---------- */
+  .cat-grid{ display:grid; grid-template-columns:repeat(6,1fr); gap:18px;}
+  .cat-card{ position:relative; aspect-ratio:3/4; border-radius:var(--radius); overflow:hidden; cursor:pointer;}
+  .cat-card::before{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, rgba(43,38,34,0.55) 100%); z-index:1;}
+  .cat-label{ position:absolute; bottom:16px; left:0; right:0; text-align:center; color:#fff; font-family:'Fraunces',serif; font-size:15px; z-index:2;}
+  .cat-ph{ width:100%; height:100%;}
+
+  /* ---------- COMPACT Product Cards ---------- */
+  .product-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:16px;}
+  .product-card{ position:relative; font-size:13px;}
+  .product-media{ position:relative; aspect-ratio:4/5; border-radius:var(--radius); overflow:hidden; background:var(--beige); margin-bottom:10px; cursor:pointer;}
+  .product-ph{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-size:26px; color:#fff; transition:transform .4s ease;}
+  .product-card:hover .product-ph{ transform:scale(1.06);}
+  .badge{ position:absolute; top:8px; left:8px; background:var(--charcoal); color:var(--ivory); font-size:8.5px; letter-spacing:0.08em; padding:4px 7px; border-radius:3px; text-transform:uppercase; font-weight:600; z-index:2;}
+  .discount-badge{ position:absolute; top:8px; right:8px; background:var(--rose-deep); color:#fff; font-size:9px; padding:4px 6px; border-radius:3px; font-weight:600; z-index:2;}
+  .wish-btn{ position:absolute; bottom:8px; right:8px; width:28px; height:28px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 10px rgba(0,0,0,0.12); z-index:2; opacity:0; transform:translateY(4px); transition:all .2s;}
+  .product-card:hover .wish-btn{ opacity:1; transform:translateY(0);}
+  .wish-btn.active svg{ fill:var(--rose-deep); stroke:var(--rose-deep);}
+  .quick-add{ position:absolute; left:8px; right:8px; bottom:8px; background:var(--charcoal); color:var(--ivory); font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; padding:9px; text-align:center; border-radius:4px; opacity:0; transform:translateY(6px); transition:all .2s; font-weight:600; z-index:2;}
+  .product-card:hover .quick-add{ opacity:1; transform:translateY(0);}
+  .p-name{ font-family:'Fraunces',serif; font-size:13.5px; margin-bottom:2px; cursor:pointer; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; line-height:1.3; min-height:2.6em;}
+  .p-desc{ font-size:11px; color:var(--charcoal-soft); margin-bottom:5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .p-rating{ display:flex; align-items:center; gap:5px; font-size:10.5px; color:var(--charcoal-soft); margin-bottom:5px;}
+  .stars{ color:var(--rose-deep); letter-spacing:1px; font-size:11px;}
+  .p-price{ display:flex; align-items:baseline; gap:6px; font-size:13px; font-weight:600; flex-wrap:wrap;}
+  .p-price .old{ font-size:11px; color:#A69C8E; text-decoration:line-through; font-weight:400;}
+  .p-price .off{ font-size:10px; color:var(--rose-deep); font-weight:600;}
+
+  /* ---------- Promo Banner ---------- */
+  .promo{ position:relative; min-height:400px; display:flex; align-items:center; border-radius:var(--radius); overflow:hidden;}
+  .promo-ph{ position:absolute; inset:0; background:linear-gradient(120deg,#B4746A,#2B2622);}
+  .promo::before{ content:''; position:absolute; inset:0; background:linear-gradient(90deg, rgba(43,38,34,0.72) 0%, rgba(43,38,34,0.28) 55%, transparent 100%); z-index:1;}
+  .promo-copy{ position:relative; z-index:2; padding:0 70px; max-width:520px; color:#fff;}
+  .promo-copy h2{ color:#fff; font-size:38px; margin-bottom:14px;}
+  .promo-copy p{ font-size:15px; line-height:1.7; margin-bottom:26px; color:rgba(255,255,255,0.85);}
+
+  /* ---------- Carousel ---------- */
+  .carousel{ display:flex; gap:16px; overflow-x:auto; padding-bottom:10px; scroll-snap-type:x mandatory;}
+  .carousel::-webkit-scrollbar{ height:4px;}
+  .carousel::-webkit-scrollbar-thumb{ background:var(--line); border-radius:10px;}
+  .carousel .product-card{ min-width:190px; max-width:190px; scroll-snap-align:start;}
+
+  /* ---------- Why choose us ---------- */
+  .benefits{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
+  .benefit{ background:var(--ivory); padding:40px 28px; text-align:center;}
+  .benefit .ic{ width:42px; height:42px; margin:0 auto 18px; border-radius:50%; border:1px solid var(--rose-deep); display:flex; align-items:center; justify-content:center; color:var(--rose-deep);}
+  .benefit h3{ font-size:15.5px; margin-bottom:8px; font-family:'Inter',sans-serif; font-weight:600;}
+  .benefit p{ font-size:12px; color:var(--charcoal-soft); line-height:1.6;}
+
+  /* ---------- Brand story ---------- */
+  .story{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+  .story-imgs{ position:relative; height:440px;}
+  .story-imgs .img-a{ position:absolute; width:78%; height:80%; top:0; left:0; border-radius:var(--radius); overflow:hidden; background:linear-gradient(140deg,#EFE4D6,#B4746A);}
+  .story-imgs .img-b{ position:absolute; width:52%; height:56%; bottom:0; right:0; border-radius:var(--radius); overflow:hidden; border:6px solid var(--ivory); box-shadow:0 20px 40px rgba(0,0,0,0.12); background:linear-gradient(140deg,#2B2622,#8C5049);}
+  .story-copy p{ font-size:15px; line-height:1.85; color:var(--charcoal-soft); margin-bottom:14px;}
+  .story-copy h2{ font-size:36px; margin-bottom:20px; max-width:440px;}
+
+  /* ---------- Reviews ---------- */
+  .review-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .review-card{ background:var(--white); border:1px solid var(--line); border-radius:var(--radius); padding:28px;}
+  .review-card .stars{ margin-bottom:14px; display:block;}
+  .review-card p{ font-size:14px; line-height:1.7; color:var(--charcoal-soft); margin-bottom:20px; font-style:italic;}
+  .reviewer{ display:flex; align-items:center; justify-content:space-between; font-size:12px; flex-wrap:wrap; gap:6px;}
+  .reviewer .name{ font-weight:600; display:flex; align-items:center; gap:8px;}
+  .verified{ background:var(--rose-pale); color:var(--rose-deep); font-size:9px; padding:3px 7px; border-radius:3px; font-weight:600;}
+  .reviewer .prod{ color:#A69C8E; font-size:11px;}
+
+  /* ---------- Instagram ---------- */
+  .insta-grid{ display:grid; grid-template-columns:repeat(6,1fr); gap:12px;}
+  .insta-item{ position:relative; aspect-ratio:1/1; border-radius:var(--radius); overflow:hidden; cursor:pointer;}
+  .insta-item::before{ content:'♡ View'; position:absolute; inset:0; background:rgba(43,38,34,0.45); color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; opacity:0; transition:.2s; z-index:1;}
+  .insta-item:hover::before{ opacity:1;}
+  .insta-ph{ width:100%; height:100%;}
+
+  /* ---------- Newsletter ---------- */
+  .newsletter{ background:var(--charcoal); border-radius:var(--radius); padding:64px 50px; text-align:center; color:var(--ivory);}
+  .newsletter h2{ color:#fff; font-size:32px; margin:10px 0 8px;}
+  .newsletter p{ color:rgba(255,255,255,0.7); font-size:14px; max-width:440px; margin:0 auto 26px;}
+  .news-form{ display:flex; max-width:440px; margin:0 auto; border-radius:var(--radius); overflow:hidden;}
+  .news-form input{ flex:1; border:none; border-radius:0;}
+  .news-form button{ padding:0 26px; background:var(--rose-deep); color:#fff; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; font-weight:600;}
+  .news-form button:hover{ background:var(--rose);}
+
+  /* ---------- Footer ---------- */
+  footer{ background:var(--beige); padding:70px 0 30px;}
+  .footer-grid{ display:grid; grid-template-columns:1.4fr repeat(4,1fr); gap:40px; margin-bottom:50px;}
+  .footer-col h4{ font-size:11px; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:18px; font-weight:600; color:var(--charcoal-soft);}
+  .footer-col a{ display:block; font-size:13px; margin-bottom:11px; color:var(--charcoal-soft);}
+  .footer-col a:hover{ color:var(--rose-deep);}
+  .footer-brand p{ font-size:13px; color:var(--charcoal-soft); line-height:1.7; max-width:260px; margin:12px 0 18px;}
+  .payments{ display:flex; gap:8px; flex-wrap:wrap;}
+  .pay-chip{ font-size:10px; border:1px solid var(--line); padding:6px 10px; border-radius:4px; color:var(--charcoal-soft); background:var(--ivory);}
+  .footer-bottom{ display:flex; justify-content:space-between; align-items:center; padding-top:26px; border-top:1px solid var(--line); font-size:12px; color:var(--charcoal-soft); flex-wrap:wrap; gap:12px;}
+  .secure-badge{ display:flex; align-items:center; gap:8px; font-size:11px;}
+
+  /* ---------- Breadcrumb ---------- */
+  .breadcrumb{ font-size:12px; color:var(--charcoal-soft); padding:20px 0; display:flex; gap:6px; align-items:center;}
+  .breadcrumb a:hover{ color:var(--rose-deep);}
+
+  /* ---------- Shop Page ---------- */
+  .shop-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:26px; flex-wrap:wrap; gap:14px;}
+  .shop-head h1{ font-size:30px;}
+  .shop-count{ font-size:12.5px; color:var(--charcoal-soft);}
+  .shop-toolbar{ display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px;}
+  .shop-toolbar select{ width:auto; padding:9px 12px; font-size:12px;}
+  .shop-layout{ display:grid; grid-template-columns:230px 1fr; gap:36px; align-items:start;}
+  .filter-panel{ border:1px solid var(--line); border-radius:var(--radius); padding:20px; background:var(--white);}
+  .filter-group{ margin-bottom:22px;}
+  .filter-group:last-child{ margin-bottom:0;}
+  .filter-title{ font-size:11.5px; text-transform:uppercase; letter-spacing:0.08em; font-weight:600; margin-bottom:12px; color:var(--charcoal);}
+  .filter-opt{ display:flex; align-items:center; gap:8px; font-size:13px; margin-bottom:9px; color:var(--charcoal-soft); cursor:pointer;}
+  .filter-opt input{ width:auto; accent-color:var(--rose-deep);}
+  .shop-empty{ text-align:center; padding:60px 20px; color:var(--charcoal-soft); font-size:14px;}
+  .mobile-shop-bar{ display:none; position:fixed; bottom:0; left:0; right:0; background:var(--white); border-top:1px solid var(--line); z-index:90; padding:10px 16px; gap:10px; box-shadow:0 -6px 20px rgba(0,0,0,0.06);}
+  .mobile-shop-bar button{ flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; font-weight:600; border:1px solid var(--line); border-radius:var(--radius);}
+
+  /* ---------- Product Detail Page ---------- */
+  .pdp{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:flex-start;}
+  .pdp-gallery-main{ aspect-ratio:1/1; border-radius:var(--radius); overflow:hidden; margin-bottom:14px;}
+  .pdp-thumbs{ display:flex; gap:10px;}
+  .pdp-thumb{ width:70px; height:70px; border-radius:4px; overflow:hidden; cursor:pointer; border:2px solid transparent; opacity:.7;}
+  .pdp-thumb.active{ border-color:var(--rose-deep); opacity:1;}
+  .pdp-info h1{ font-size:28px; margin-bottom:10px;}
+  .pdp-rating{ display:flex; align-items:center; gap:8px; font-size:13px; color:var(--charcoal-soft); margin-bottom:16px;}
+  .pdp-price{ display:flex; align-items:baseline; gap:12px; font-size:26px; font-weight:600; margin-bottom:16px;}
+  .pdp-price .old{ font-size:16px; color:#A69C8E; text-decoration:line-through; font-weight:400;}
+  .pdp-price .off{ font-size:13px; color:var(--rose-deep); font-weight:600;}
+  .pdp-desc{ font-size:14px; line-height:1.75; color:var(--charcoal-soft); margin-bottom:20px;}
+  .pdp-benefits{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;}
+  .pdp-benefits span{ font-size:11.5px; background:var(--rose-pale); color:var(--rose-deep); padding:6px 12px; border-radius:20px; font-weight:600;}
+  .pdp-row{ margin-bottom:20px;}
+  .size-opts{ display:flex; gap:10px; flex-wrap:wrap;}
+  .size-opt{ padding:9px 16px; border:1px solid var(--line); border-radius:var(--radius); font-size:12.5px; cursor:pointer;}
+  .size-opt.active{ border-color:var(--charcoal); background:var(--charcoal); color:var(--ivory);}
+  .qty-selector{ display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:var(--radius);}
+  .qty-selector button{ width:38px; height:38px; font-size:16px;}
+  .qty-selector span{ width:38px; text-align:center; font-size:14px;}
+  .pdp-cta-row{ display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap;}
+  .pdp-cta-row .btn{ flex:1; min-width:150px;}
+  .stock-note{ font-size:12.5px; color:var(--rose-deep); margin-bottom:16px; font-weight:600;}
+  .delivery-check{ display:flex; gap:10px; margin-bottom:10px;}
+  .delivery-check input{ flex:1;}
+  .delivery-note{ font-size:12px; color:var(--charcoal-soft);}
+  .trust-row{ display:flex; gap:20px; margin-top:20px; padding-top:20px; border-top:1px solid var(--line); flex-wrap:wrap;}
+  .trust-item{ display:flex; align-items:center; gap:8px; font-size:11.5px; color:var(--charcoal-soft);}
+  .pdp-tabs{ display:flex; gap:30px; border-bottom:1px solid var(--line); margin:60px 0 30px; overflow-x:auto;}
+  .pdp-tab{ padding:14px 0; font-size:13px; font-weight:600; color:var(--charcoal-soft); white-space:nowrap; border-bottom:2px solid transparent; cursor:pointer;}
+  .pdp-tab.active{ color:var(--charcoal); border-color:var(--rose-deep);}
+  .pdp-tab-content{ display:none; font-size:14px; line-height:1.8; color:var(--charcoal-soft); max-width:760px;}
+  .pdp-tab-content.active{ display:block;}
+  .pdp-tab-content ul{ padding-left:20px; margin-top:10px;}
+  .faq-item{ border-bottom:1px solid var(--line); padding:16px 0;}
+  .faq-q{ font-weight:600; color:var(--charcoal); cursor:pointer; display:flex; justify-content:space-between;}
+  .faq-a{ display:none; margin-top:10px; color:var(--charcoal-soft);}
+  .faq-item.open .faq-a{ display:block;}
+  .sticky-cart-mobile{ display:none; position:fixed; bottom:0; left:0; right:0; background:var(--white); border-top:1px solid var(--line); padding:12px 16px; z-index:90; align-items:center; gap:12px; box-shadow:0 -6px 20px rgba(0,0,0,0.08);}
+  .sticky-cart-mobile .p-price{ flex:1;}
+
+  /* ---------- Cart Page ---------- */
+  .cart-layout{ display:grid; grid-template-columns:1fr 340px; gap:40px; align-items:start;}
+  .cart-item{ display:grid; grid-template-columns:80px 1fr auto; gap:16px; padding:18px 0; border-bottom:1px solid var(--line); align-items:center;}
+  .cart-item-img{ width:80px; height:80px; border-radius:4px;}
+  .cart-item-name{ font-family:'Fraunces',serif; font-size:14.5px; margin-bottom:4px;}
+  .cart-item-meta{ font-size:12px; color:var(--charcoal-soft); margin-bottom:8px;}
+  .cart-item-actions{ display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  .cart-item-remove{ font-size:11.5px; color:var(--rose-deep); text-decoration:underline; font-weight:600;}
+  .cart-item-price{ text-align:right; font-weight:600; font-size:14px;}
+  .cart-summary{ border:1px solid var(--line); border-radius:var(--radius); padding:24px; background:var(--white); position:sticky; top:110px;}
+  .cart-summary h3{ font-size:17px; margin-bottom:18px;}
+  .summary-row{ display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:12px; color:var(--charcoal-soft);}
+  .summary-row.total{ font-size:16px; font-weight:600; color:var(--charcoal); border-top:1px solid var(--line); padding-top:14px; margin-top:6px;}
+  .summary-row .disc{ color:var(--rose-deep);}
+  .coupon-row{ display:flex; gap:8px; margin-bottom:18px;}
+  .coupon-msg{ font-size:11.5px; margin-top:-10px; margin-bottom:14px; font-weight:600;}
+  .coupon-msg.ok{ color:#5c8a5c;}
+  .coupon-msg.err{ color:var(--rose-deep);}
+  .empty-state{ text-align:center; padding:70px 20px;}
+  .empty-state svg{ margin-bottom:20px; opacity:.4;}
+  .empty-state p{ color:var(--charcoal-soft); font-size:14px; margin-bottom:22px;}
+
+  /* ---------- Checkout ---------- */
+  .checkout-layout{ display:grid; grid-template-columns:1fr 380px; gap:50px; align-items:start;}
+  .checkout-steps{ display:flex; gap:0; margin-bottom:34px; font-size:11.5px; color:var(--charcoal-soft); flex-wrap:wrap;}
+  .checkout-steps span{ display:flex; align-items:center; gap:6px;}
+  .checkout-steps span::after{ content:'—'; margin:0 10px; color:var(--line);}
+  .checkout-steps span:last-child::after{ display:none;}
+  .checkout-steps .num{ width:18px; height:18px; border-radius:50%; background:var(--line); color:var(--charcoal-soft); display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:600;}
+  .form-section{ margin-bottom:36px;}
+  .form-section h3{ font-size:16px; margin-bottom:16px;}
+  .form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px;}
+  .payment-opts{ display:grid; gap:10px;}
+  .pay-opt{ display:flex; align-items:center; gap:12px; border:1px solid var(--line); border-radius:var(--radius); padding:14px; cursor:pointer; font-size:13.5px;}
+  .pay-opt.active{ border-color:var(--rose-deep); background:var(--rose-pale);}
+  .pay-opt input{ width:auto; accent-color:var(--rose-deep);}
+  .order-summary-box{ border:1px solid var(--line); border-radius:var(--radius); padding:24px; background:var(--white); position:sticky; top:110px;}
+  .mini-item{ display:flex; gap:12px; padding:10px 0; border-bottom:1px solid var(--line); align-items:center;}
+  .mini-thumb{ width:48px; height:48px; border-radius:4px; flex-shrink:0;}
+  .mini-item-name{ font-size:12.5px; font-weight:600; margin-bottom:2px;}
+  .mini-item-meta{ font-size:11px; color:var(--charcoal-soft);}
+  .mini-item-price{ margin-left:auto; font-size:12.5px; font-weight:600;}
+
+  /* ---------- Order Success ---------- */
+  .success-box{ text-align:center; max-width:560px; margin:0 auto; padding:60px 20px;}
+  .success-icon{ width:70px; height:70px; border-radius:50%; background:var(--rose-pale); color:var(--rose-deep); display:flex; align-items:center; justify-content:center; margin:0 auto 24px;}
+  .success-box h1{ font-size:28px; margin-bottom:10px;}
+  .success-box p{ color:var(--charcoal-soft); font-size:14px; margin-bottom:4px;}
+  .order-num{ font-family:'Fraunces',serif; font-size:20px; color:var(--rose-deep); margin:16px 0 24px;}
+  .success-summary{ text-align:left; border:1px solid var(--line); border-radius:var(--radius); padding:22px; margin:26px 0; background:var(--white);}
+
+  .page{ display:none;}
+  .page.active{ display:block;}
+  .toast{ position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--charcoal); color:var(--ivory); padding:14px 24px; border-radius:var(--radius); font-size:13px; z-index:999; opacity:0; pointer-events:none; transition:all .25s; display:flex; align-items:center; gap:10px;}
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0);}
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:1080px){
+    .cat-grid{ grid-template-columns:repeat(3,1fr);}
+    .product-grid{ grid-template-columns:repeat(4,1fr);}
+    .benefits{ grid-template-columns:repeat(2,1fr);}
+    .story{ grid-template-columns:1fr; gap:36px;}
+    .story-imgs{ height:320px;}
+    .review-grid{ grid-template-columns:1fr;}
+    .insta-grid{ grid-template-columns:repeat(3,1fr);}
+    .footer-grid{ grid-template-columns:repeat(3,1fr);}
+    .shop-layout{ grid-template-columns:1fr;}
+    .filter-panel{ display:none;}
+    .pdp{ grid-template-columns:1fr;}
+    .cart-layout,.checkout-layout{ grid-template-columns:1fr;}
+    .nav-search{ display:none;}
+  }
+  @media(max-width:760px){
+    .wrap{ padding:0 18px;}
+    .nav{ padding:14px 18px;}
+    .nav-links{ display:none;}
+    .hamburger{ display:flex;}
+    .hero{ grid-template-columns:1fr; min-height:auto;}
+    .hero-img{ height:340px; order:-1;}
+    .hero-copy{ padding:36px 22px;}
+    .hero-copy h1{ font-size:32px;}
+    .hero-badge{ display:none;}
+    .section{ padding:50px 0;}
+    .section-head{ flex-direction:column; align-items:flex-start;}
+    .section-head-sub{ text-align:left;}
+    .section-head h2{ font-size:24px;}
+    .cat-grid{ grid-template-columns:repeat(2,1fr);}
+    .product-grid{ grid-template-columns:repeat(2,1fr); gap:12px;}
+    .p-name{ font-size:12.5px;}
+    .promo{ min-height:320px;}
+    .promo-copy{ padding:0 26px;}
+    .promo-copy h2{ font-size:26px;}
+    .benefits{ grid-template-columns:1fr 1fr;}
+    .benefit{ padding:24px 14px;}
+    .story-copy h2{ font-size:24px;}
+    .insta-grid{ grid-template-columns:repeat(3,1fr); gap:8px;}
+    .newsletter{ padding:44px 20px;}
+    .news-form{ flex-direction:column;}
+    .news-form button{ padding:14px;}
+    .footer-grid{ grid-template-columns:repeat(2,1fr); gap:26px;}
+    .footer-bottom{ flex-direction:column; text-align:center;}
+    .mobile-shop-bar{ display:flex;}
+    body.has-mobile-bar .page{ padding-bottom:70px;}
+    .sticky-cart-mobile.show{ display:flex;}
+    .form-grid{ grid-template-columns:1fr;}
+    .cart-item{ grid-template-columns:60px 1fr; }
+    .cart-item-price{ grid-column:1/-1; text-align:left; margin-top:6px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">
+  <div class="announce-track">
+    <span>FREE SHIPPING ON ORDERS ABOVE ₹999</span>
+    <span>10% OFF ON YOUR FIRST ORDER — CODE TAGVIX10</span>
+    <span>FREE SHIPPING ON ORDERS ABOVE ₹999</span>
+    <span>10% OFF ON YOUR FIRST ORDER — CODE TAGVIX10</span>
+  </div>
+</div>
+
+<header>
+  <div class="nav">
+    <a href="#/" class="logo" data-nav>Tagvix</a>
+    <nav class="nav-links">
+      <a href="#/" data-nav data-route="home">Home</a>
+      <a href="#/shop" data-nav data-route="shop">Shop</a>
+      <a href="#/shop" data-nav data-route="shop">Categories</a>
+      <a href="#/shop?filter=bestseller" data-nav data-route="shop">Best Sellers</a>
+      <a href="#/shop?filter=new" data-nav data-route="shop">New Arrivals</a>
+      <a href="#/" data-nav data-route="home">About</a>
+      <a href="#/" data-nav data-route="home">Contact</a>
+    </nav>
+    <div class="nav-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4A433C" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="navSearchInput" placeholder="Search products...">
+      <div class="search-suggest" id="searchSuggest"></div>
+    </div>
+    <div class="nav-icons">
+      <button aria-label="Account">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
+      </button>
+      <button aria-label="Wishlist" id="wishNavBtn" class="icon-badge" data-count="0">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-9.5-9C1 8 2.5 4.5 6 4c2-.3 4 1 6 3.5C14 5 16-.3 18 4c3.5.5 5 4 3.5 8-2.5 4.5-9.5 9-9.5 9z"/></svg>
+      </button>
+      <a href="#/cart" data-nav data-route="cart" class="icon-badge" id="cartNavBtn" data-count="0" aria-label="Cart">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16l-1.5 11a2 2 0 01-2 1.7H7.5a2 2 0 01-2-1.7L4 8z"/><path d="M8 8V6a4 4 0 018 0v2"/></svg>
+      </a>
+      <button class="hamburger" aria-label="Menu" id="hamburgerBtn">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ======================= HOME PAGE ======================= -->
+<main class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">The Everyday Ritual</span>
+      <h1>Beauty That<br>Feels Like You</h1>
+      <p>Discover thoughtfully crafted skincare and beauty essentials made to elevate your everyday routine.</p>
+      <div class="hero-ctas">
+        <a href="#/shop" data-nav data-route="shop" class="btn btn-primary">Shop Now</a>
+        <a href="#/shop?filter=bestseller" data-nav data-route="shop" class="btn btn-outline">Explore Best Sellers</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <div class="hero-ph">Tagvix</div>
+      <div class="hero-badge">
+        <div class="dot">★</div>
+        <span>Loved by 40,000+ customers across India</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="eyebrow">Shop by Category</span><h2>Find Your Ritual</h2></div>
+        <p class="section-head-sub">Curated edits across skin, hair and body — built around what your routine actually needs.</p>
+      </div>
+      <div class="cat-grid" id="catGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--white);">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="eyebrow">Customer Favorites</span><h2>Best Sellers</h2></div>
+        <p class="section-head-sub">The formulas our community reaches for again and again.</p>
+      </div>
+      <div class="product-grid" id="bestSellerGrid"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="promo">
+        <div class="promo-ph"></div>
+        <div class="promo-copy">
+          <span class="eyebrow" style="color:var(--rose-pale)">Skin First</span>
+          <h2>Your Skin Deserves Better</h2>
+          <p>Simple, effective beauty essentials designed for your everyday routine.</p>
+          <a href="#/shop?category=Skincare" data-nav data-route="shop" class="btn btn-ghost">Shop Skincare</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--white);">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="eyebrow">Just Launched</span><h2>New Arrivals</h2></div>
+      </div>
+      <div class="carousel" id="newArrivalsCarousel"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div><span class="eyebrow">Why Tagvix</span><h2>Why Choose Us</h2></div>
+      </div>
+      <div class="benefits">
+        <div class="benefit"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-9.5-9C1 8 2.5 4.5 6 4c2-.3 4 1 6 3.5C14 5 16-.3 18 4c3.5.5 5 4 3.5 8-2.5 4.5-9.5 9-9.5 9z"/></svg></div><h3>Cruelty Free</h3><p>Never tested on animals, always kind to skin.</p></div>
+        <div class="benefit"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div><h3>Dermatologically Tested</h3><p>Every formula clinically verified for safety.</p></div>
+        <div class="benefit"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2L4 7v6c0 5 3.5 8.5 8 9 4.5-.5 8-4 8-9V7l-8-5z"/></svg></div><h3>Clean Ingredients</h3><p>No parabens, sulphates or mineral oils, ever.</p></div>
+        <div class="benefit"><div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 16V8a2 2 0 012-2h9l5 5v5a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><circle cx="8" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></div><h3>Secure & Fast Delivery</h3><p>Encrypted checkout, delivered in 2–4 days.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--white);">
+    <div class="wrap">
+      <div class="story">
+        <div class="story-imgs">
+          <div class="img-a"></div>
+          <div class="img-b"></div>
+        </div>
+        <div class="story-copy">
+          <span class="eyebrow">Our Philosophy</span>
+          <h2>Beauty, Backed by Better Ingredients</h2>
+          <p>Every Tagvix formula begins with a single question: does this ingredient earn its place? We work with dermatologists and formulation chemists to keep every product simple, effective and honest.</p>
+          <p>No filler, no unnecessary fragrance load, no shortcuts — just concentrated actives at clinically-proven percentages.</p>
+          <a href="#/" data-nav data-route="home" class="btn btn-outline">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><div><span class="eyebrow">Real Stories</span><h2>Loved By Our Community</h2></div></div>
+      <div class="review-grid">
+        <div class="review-card"><span class="stars">★★★★★</span><p>"My skin has never felt this balanced. The Glow Serum genuinely changed my routine within three weeks."</p><div class="reviewer"><span class="name">Ananya R. <span class="verified">Verified Buyer</span></span><span class="prod">Glow Radiance Serum</span></div></div>
+        <div class="review-card"><span class="stars">★★★★★</span><p>"Lightweight, absorbs fast, and doesn't pill under makeup. This is my third bottle already."</p><div class="reviewer"><span class="name">Priya M. <span class="verified">Verified Buyer</span></span><span class="prod">Hydra Bounce Moisturizer</span></div></div>
+        <div class="review-card"><span class="stars">★★★★★</span><p>"The colour payoff and the shine — I get compliments every single time I wear this."</p><div class="reviewer"><span class="name">Kavya S. <span class="verified">Verified Buyer</span></span><span class="prod">Velvet Tint Lip Oil</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--white);">
+    <div class="wrap">
+      <div class="section-head"><div><span class="eyebrow">@tagvixbeauty</span><h2>Follow Your Beauty Ritual</h2></div></div>
+      <div class="insta-grid" id="instaGrid"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="newsletter">
+        <span class="eyebrow">Join The List</span>
+        <h2>Get 10% Off Your First Order</h2>
+        <p>Join our beauty community for exclusive offers, new launches and skincare tips.</p>
+        <form class="news-form" id="newsletterForm">
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit">Get 10% Off</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ======================= SHOP PAGE ======================= -->
+<main class="page" id="page-shop">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="#/" data-nav data-route="home">Home</a> / <span>Shop</span></div>
+    <div class="shop-head">
+      <div>
+        <span class="eyebrow">All Products</span>
+        <h1>Shop Tagvix</h1>
+      </div>
+      <span class="shop-count" id="shopCount"></span>
+    </div>
+    <div class="shop-toolbar">
+      <div style="font-size:13px;color:var(--charcoal-soft)" id="shopActiveFilters"></div>
+      <select id="sortSelect">
+        <option value="featured">Sort: Featured</option>
+        <option value="newest">Sort: Newest</option>
+        <option value="price-asc">Sort: Price Low to High</option>
+        <option value="price-desc">Sort: Price High to Low</option>
+        <option value="rating">Sort: Highest Rated</option>
+      </select>
+    </div>
+    <div class="shop-layout">
+      <aside class="filter-panel" id="filterPanel">
+        <div class="filter-group">
+          <div class="filter-title">Category</div>
+          <div id="filterCategory"></div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-title">Price</div>
+          <label class="filter-opt"><input type="radio" name="price" value="all" checked> All Prices</label>
+          <label class="filter-opt"><input type="radio" name="price" value="0-600"> Under ₹600</label>
+          <label class="filter-opt"><input type="radio" name="price" value="600-1000"> ₹600 – ₹1000</label>
+          <label class="filter-opt"><input type="radio" name="price" value="1000-99999"> ₹1000+</label>
+        </div>
+        <div class="filter-group">
+          <div class="filter-title">Skin Type</div>
+          <div id="filterSkinType"></div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-title">Rating</div>
+          <label class="filter-opt"><input type="radio" name="rating" value="0" checked> All Ratings</label>
+          <label class="filter-opt"><input type="radio" name="rating" value="4.5"> 4.5 & up</label>
+          <label class="filter-opt"><input type="radio" name="rating" value="4"> 4.0 & up</label>
+        </div>
+        <div class="filter-group">
+          <div class="filter-title">Availability</div>
+          <label class="filter-opt"><input type="checkbox" id="filterInStock"> In Stock Only</label>
+        </div>
+        <button class="btn btn-outline btn-sm" style="width:100%" id="clearFiltersBtn">Clear Filters</button>
+      </aside>
+      <div>
+        <div class="product-grid" id="shopGrid"></div>
+        <div class="shop-empty" id="shopEmpty" style="display:none;">No products found. Try adjusting your filters.</div>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-shop-bar">
+    <button id="mobileFilterBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M7 12h10M10 18h4"/></svg> Filter</button>
+    <button id="mobileSortBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 10l5-5 5 5M7 14l5 5 5-5"/></svg> Sort</button>
+  </div>
+</main>
+
+<!-- ======================= PRODUCT DETAIL PAGE ======================= -->
+<main class="page" id="page-product">
+  <div class="wrap">
+    <div class="breadcrumb" id="pdpBreadcrumb"></div>
+    <div class="pdp">
+      <div>
+        <div class="pdp-gallery-main" id="pdpMainImg"></div>
+        <div class="pdp-thumbs" id="pdpThumbs"></div>
+      </div>
+      <div class="pdp-info" id="pdpInfo"></div>
+    </div>
+    <div class="pdp-tabs" id="pdpTabs">
+      <div class="pdp-tab active" data-tab="desc">Description</div>
+      <div class="pdp-tab" data-tab="ingredients">Ingredients</div>
+      <div class="pdp-tab" data-tab="howto">How To Use</div>
+      <div class="pdp-tab" data-tab="reviews">Reviews</div>
+      <div class="pdp-tab" data-tab="faq">FAQs</div>
+    </div>
+    <div class="pdp-tab-content active" id="tab-desc"></div>
+    <div class="pdp-tab-content" id="tab-ingredients"></div>
+    <div class="pdp-tab-content" id="tab-howto"></div>
+    <div class="pdp-tab-content" id="tab-reviews"></div>
+    <div class="pdp-tab-content" id="tab-faq"></div>
+
+    <section class="section">
+      <div class="section-head"><div><span class="eyebrow">You May Also Like</span><h2>Related Products</h2></div></div>
+      <div class="product-grid" id="relatedGrid"></div>
+    </section>
+  </div>
+  <div class="sticky-cart-mobile" id="stickyCartMobile">
+    <div class="p-price" id="stickyPrice"></div>
+    <button class="btn btn-primary btn-sm" id="stickyAddBtn">Add to Cart</button>
+  </div>
+</main>
+
+<!-- ======================= CART PAGE ======================= -->
+<main class="page" id="page-cart">
+  <div class="wrap" style="padding-top:30px;">
+    <h1 style="font-size:30px;margin-bottom:26px;">Shopping Cart</h1>
+    <div id="cartContent"></div>
+    <section class="section" id="cartRecsSection" style="display:none;">
+      <div class="section-head"><div><span class="eyebrow">You May Also Like</span><h2>Recommended For You</h2></div></div>
+      <div class="product-grid" id="cartRecsGrid"></div>
+    </section>
+  </div>
+</main>
+
+<!-- ======================= CHECKOUT PAGE ======================= -->
+<main class="page" id="page-checkout">
+  <div class="wrap" style="padding-top:30px;">
+    <h1 style="font-size:28px;margin-bottom:8px;">Checkout</h1>
+    <div class="checkout-steps">
+      <span><span class="num">1</span> Contact</span>
+      <span><span class="num">2</span> Shipping</span>
+      <span><span class="num">3</span> Payment</span>
+      <span><span class="num">4</span> Review</span>
+    </div>
+    <div class="checkout-layout">
+      <form id="checkoutForm">
+        <div class="form-section">
+          <h3>1. Contact Information</h3>
+          <div class="form-grid">
+            <div><label>Full Name</label><input type="text" id="cName" required></div>
+            <div><label>Email</label><input type="email" id="cEmail" required></div>
+          </div>
+          <label>Phone Number</label><input type="tel" id="cPhone" required pattern="[0-9]{10}" placeholder="10-digit mobile number">
+        </div>
+        <div class="form-section">
+          <h3>2. Shipping Address</h3>
+          <label>Address</label><input type="text" id="cAddress" required style="margin-bottom:14px;">
+          <div class="form-grid">
+            <div><label>City</label><input type="text" id="cCity" required></div>
+            <div><label>State</label><input type="text" id="cState" required></div>
+          </div>
+          <label>Pincode</label><input type="text" id="cPincode" required pattern="[0-9]{6}" placeholder="6-digit pincode">
+        </div>
+        <div class="form-section">
+          <h3>3. Payment Method</h3>
+          <div class="payment-opts" id="paymentOpts">
+            <label class="pay-opt active"><input type="radio" name="pay" value="upi" checked> UPI</label>
+            <label class="pay-opt"><input type="radio" name="pay" value="card"> Credit / Debit Card</label>
+            <label class="pay-opt"><input type="radio" name="pay" value="netbanking"> Net Banking</label>
+            <label class="pay-opt"><input type="radio" name="pay" value="cod"> Cash on Delivery</label>
+          </div>
+          <p style="font-size:11.5px;color:var(--charcoal-soft);margin-top:10px;">This is a demo checkout — no real payment will be processed.</p>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;padding:16px;" id="placeOrderBtn">Place Order</button>
+      </form>
+      <div class="order-summary-box">
+        <h3 style="font-size:17px;margin-bottom:16px;">Order Summary</h3>
+        <div id="checkoutItems"></div>
+        <div class="summary-row" style="margin-top:16px;"><span>Subtotal</span><span id="coSubtotal"></span></div>
+        <div class="summary-row"><span>Shipping</span><span id="coShipping"></span></div>
+        <div class="summary-row" id="coDiscountRow" style="display:none;"><span>Discount</span><span class="disc" id="coDiscount"></span></div>
+        <div class="summary-row total"><span>Total</span><span id="coTotal"></span></div>
+        <div class="secure-badge" style="margin-top:16px;justify-content:center;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+          100% Secure Checkout
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ======================= ORDER SUCCESS PAGE ======================= -->
+<main class="page" id="page-success">
+  <div class="wrap">
+    <div class="success-box">
+      <div class="success-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h1>Order Placed Successfully!</h1>
+      <p>Thank you for shopping with Tagvix. A confirmation has been sent to your email.</p>
+      <div class="order-num" id="successOrderNum"></div>
+      <div class="success-summary" id="successSummary"></div>
+      <p style="margin-bottom:26px;">Estimated delivery: <strong id="successDelivery"></strong></p>
+      <a href="#/shop" data-nav data-route="shop" class="btn btn-primary">Continue Shopping</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col footer-brand">
+        <div class="logo">Tagvix</div>
+        <p>Thoughtfully crafted skincare and beauty essentials, made to elevate your everyday ritual.</p>
+        <div class="payments">
+          <span class="pay-chip">UPI</span><span class="pay-chip">Visa</span><span class="pay-chip">Mastercard</span><span class="pay-chip">RuPay</span><span class="pay-chip">Net Banking</span><span class="pay-chip">COD</span>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Shop</h4><a href="#/shop" data-nav data-route="shop">All Products</a><a href="#/shop?category=Skincare" data-nav data-route="shop">Skincare</a><a href="#/shop?category=Face" data-nav data-route="shop">Makeup</a><a href="#/shop?category=Hair Care" data-nav data-route="shop">Hair Care</a><a href="#/shop?filter=bestseller" data-nav data-route="shop">Best Sellers</a><a href="#/shop?filter=new" data-nav data-route="shop">New Arrivals</a></div>
+      <div class="footer-col"><h4>Help</h4><a href="#">Contact Us</a><a href="#">FAQs</a><a href="#">Shipping & Delivery</a><a href="#">Returns & Refunds</a><a href="#">Track Order</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="#">About Us</a><a href="#">Our Story</a><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a></div>
+      <div class="footer-col"><h4>Social</h4><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">YouTube</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Tagvix Beauty. All rights reserved.</span>
+      <span class="secure-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V7a4 4 0 018 0v4"/></svg> 100% Secure Payments</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= PRODUCT DATA ================= */
+const GRADIENTS = [
+  ['#E7CFC3','#B4746A'], ['#EFE4D6','#8C5049'], ['#F3DCD6','#C79B8D'],
+  ['#E3D8C9','#4A433C'], ['#EBD6D0','#2B2622'], ['#D8C4B0','#8C5049'],
+  ['#F0E0D2','#B4746A'], ['#E7D9C9','#6B4A42']
+];
+function ph(seed, letter){
+  const g = GRADIENTS[seed % GRADIENTS.length];
+  return `<div class="product-ph" style="background:linear-gradient(135deg,${g[0]},${g[1]})">${letter}</div>`;
+}
+function phFlat(seed){
+  const g = GRADIENTS[seed % GRADIENTS.length];
+  return `background:linear-gradient(135deg,${g[0]},${g[1]})`;
+}
+
+const PRODUCTS = [
+  {id:1, slug:'glow-radiance-serum', name:'Glow Radiance Serum', category:'Skincare', skinType:'All Skin Types', description:'A fast-absorbing vitamin C and niacinamide serum that brightens dull skin, evens tone and delivers a lasting radiance boost with daily use.', price:899, originalPrice:1199, rating:4.8, reviewCount:612, ingredients:['Vitamin C (10%)','Niacinamide','Hyaluronic Acid','Ferulic Acid'], benefits:['Brightening','Even Tone','Antioxidant'], sizes:['15ml','30ml','50ml'], stock:24, isBestSeller:true, isNewArrival:false},
+  {id:2, slug:'hydra-bounce-moisturizer', name:'Hydra Bounce Moisturizer', category:'Skincare', skinType:'Dry to Normal', description:'A lightweight yet deeply hydrating moisturizer packed with hyaluronic acid and ceramides to restore your skin barrier.', price:1039, originalPrice:1299, rating:4.7, reviewCount:438, ingredients:['Hyaluronic Acid','Ceramides','Squalane','Glycerin'], benefits:['Deep Hydration','Barrier Repair'], sizes:['50ml','100ml'], stock:18, isBestSeller:true, isNewArrival:false},
+  {id:3, slug:'velvet-tint-lip-oil', name:'Velvet Tint Lip Oil', category:'Lips', skinType:'All Skin Types', description:'A nourishing lip oil with buildable colour, jojoba oil and shea butter for soft, glossy lips all day.', price:649, originalPrice:649, rating:4.9, reviewCount:751, ingredients:['Jojoba Oil','Shea Butter','Vitamin E'], benefits:['Nourishing','Buildable Colour'], sizes:['One Size'], stock:40, isBestSeller:true, isNewArrival:false},
+  {id:4, slug:'silk-repair-hair-serum', name:'Silk Repair Hair Serum', category:'Hair Care', skinType:'All Hair Types', description:'An argan oil and keratin complex serum that tames frizz, adds shine and repairs split ends.', price:765, originalPrice:899, rating:4.5, reviewCount:289, ingredients:['Argan Oil','Keratin Complex','Vitamin B5'], benefits:['Frizz Control','Shine Boost'], sizes:['30ml','60ml'], stock:12, isBestSeller:true, isNewArrival:false},
+  {id:5, slug:'cloud-cleansing-balm', name:'Cloud Cleansing Balm', category:'Face', skinType:'All Skin Types', description:'A gentle melt-away cleansing balm that removes makeup and impurities without stripping the skin.', price:749, originalPrice:749, rating:4.6, reviewCount:198, ingredients:['Shea Butter','Sunflower Oil','Vitamin E'], benefits:['Gentle Cleansing','Makeup Removal'], sizes:['100ml'], stock:30, isBestSeller:false, isNewArrival:true},
+  {id:6, slug:'rosewater-mist', name:'Rosewater Mist', category:'Face', skinType:'All Skin Types', description:'A refreshing rosewater facial mist that hydrates, soothes and sets makeup in seconds.', price:549, originalPrice:549, rating:4.4, reviewCount:167, ingredients:['Rosewater','Glycerin','Aloe Vera'], benefits:['Hydrating','Soothing'], sizes:['100ml'], stock:22, isBestSeller:false, isNewArrival:true},
+  {id:7, slug:'overnight-repair-mask', name:'Overnight Repair Mask', category:'Skincare', skinType:'Dry to Normal', description:'A rich overnight mask that works while you sleep to repair, replenish and restore skin by morning.', price:1150, originalPrice:1150, rating:4.8, reviewCount:203, ingredients:['Retinol Alternative','Peptides','Shea Butter'], benefits:['Overnight Repair','Plumping'], sizes:['50ml'], stock:15, isBestSeller:false, isNewArrival:true},
+  {id:8, slug:'mineral-body-balm', name:'Mineral Body Balm', category:'Body Care', skinType:'All Skin Types', description:'A rich mineral-infused body balm that melts into skin for long-lasting softness and comfort.', price:899, originalPrice:899, rating:4.5, reviewCount:112, ingredients:['Shea Butter','Mineral Complex','Coconut Oil'], benefits:['Deep Moisture','Softening'], sizes:['150ml'], stock:20, isBestSeller:false, isNewArrival:true},
+  {id:9, slug:'clarity-clay-mask', name:'Clarity Clay Mask', category:'Skincare', skinType:'Oily to Combination', description:'A purifying clay mask that draws out impurities, minimizes pores and controls excess oil.', price:699, originalPrice:899, rating:4.3, reviewCount:145, ingredients:['Kaolin Clay','Salicylic Acid','Tea Tree'], benefits:['Pore Refining','Oil Control'], sizes:['75ml'], stock:0, isBestSeller:false, isNewArrival:false},
+  {id:10, slug:'matte-fusion-lipstick', name:'Matte Fusion Lipstick', category:'Lips', skinType:'All Skin Types', description:'A creamy matte lipstick with rich pigment payoff and a comfortable, non-drying finish.', price:599, originalPrice:749, rating:4.6, reviewCount:321, ingredients:['Jojoba Esters','Vitamin E','Mica'], benefits:['Long Wear','High Pigment'], sizes:['One Size'], stock:35, isBestSeller:false, isNewArrival:false},
+  {id:11, slug:'scalp-detox-shampoo', name:'Scalp Detox Shampoo', category:'Hair Care', skinType:'All Hair Types', description:'A clarifying shampoo that gently detoxifies the scalp, removes buildup and restores balance.', price:459, originalPrice:549, rating:4.2, reviewCount:98, ingredients:['Charcoal','Tea Tree','Aloe Vera'], benefits:['Deep Cleanse','Scalp Balance'], sizes:['200ml'], stock:28, isBestSeller:false, isNewArrival:false},
+  {id:12, slug:'nourish-body-lotion', name:'Nourish Body Lotion', category:'Body Care', skinType:'All Skin Types', description:'A fast-absorbing daily body lotion that leaves skin soft, smooth and lightly fragranced.', price:499, originalPrice:499, rating:4.4, reviewCount:176, ingredients:['Cocoa Butter','Glycerin','Vitamin E'], benefits:['Daily Hydration','Fast Absorbing'], sizes:['200ml','400ml'], stock:33, isBestSeller:false, isNewArrival:false},
+  {id:13, slug:'brightening-eye-cream', name:'Brightening Eye Cream', category:'Skincare', skinType:'All Skin Types', description:'A caffeine-infused eye cream that reduces puffiness and visibly brightens dark circles.', price:799, originalPrice:999, rating:4.6, reviewCount:210, ingredients:['Caffeine','Peptides','Hyaluronic Acid'], benefits:['De-Puffing','Brightening'], sizes:['15ml'], stock:19, isBestSeller:false, isNewArrival:false},
+  {id:14, slug:'essentials-travel-kit', name:'Beauty Essentials Travel Kit', category:'Beauty Essentials', skinType:'All Skin Types', description:'A curated travel-size edit of Tagvix bestsellers — perfect for on-the-go skincare rituals.', price:1299, originalPrice:1599, rating:4.7, reviewCount:88, ingredients:['Assorted Minis'], benefits:['Travel Friendly','Curated Set'], sizes:['Kit'], stock:10, isBestSeller:true, isNewArrival:true},
+];
+PRODUCTS.forEach(p=>{ p.discount = p.originalPrice > p.price ? Math.round((1-p.price/p.originalPrice)*100) : 0; });
+
+const CATEGORIES = ['Skincare','Face','Lips','Hair Care','Body Care','Beauty Essentials'];
+const SKIN_TYPES = [...new Set(PRODUCTS.map(p=>p.skinType))];
+
+/* ================= STATE / STORAGE ================= */
+const CART_KEY='tagvix_cart', WISH_KEY='tagvix_wishlist';
+function getCart(){ try{ return JSON.parse(localStorage.getItem(CART_KEY))||[]; }catch(e){ return []; } }
+function setCart(c){ localStorage.setItem(CART_KEY, JSON.stringify(c)); updateNavCounts(); }
+function getWishlist(){ try{ return JSON.parse(localStorage.getItem(WISH_KEY))||[]; }catch(e){ return []; } }
+function setWishlist(w){ localStorage.setItem(WISH_KEY, JSON.stringify(w)); updateNavCounts(); }
+
+function addToCart(id, size, qty){
+  qty = qty || 1;
+  const product = PRODUCTS.find(p=>p.id===id);
+  size = size || (product ? product.sizes[0] : 'One Size');
+  let cart = getCart();
+  const existing = cart.find(i=>i.id===id && i.size===size);
+  if(existing){ existing.qty += qty; } else { cart.push({id, size, qty}); }
+  setCart(cart);
+  showToast(`${product.name} added to cart`);
+}
+function removeFromCart(id, size){ setCart(getCart().filter(i=>!(i.id===id && i.size===size))); renderCartPage(); }
+function updateCartQty(id, size, delta){
+  let cart = getCart();
+  const item = cart.find(i=>i.id===id && i.size===size);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0){ cart = cart.filter(i=>i!==item); }
+  setCart(cart); renderCartPage();
+}
+function toggleWishlist(id){
+  let wish = getWishlist();
+  if(wish.includes(id)){ wish = wish.filter(w=>w!==id); showToast('Removed from wishlist'); }
+  else { wish.push(id); showToast('Added to wishlist'); }
+  setWishlist(wish);
+  document.querySelectorAll(`.wish-btn[data-id="${id}"]`).forEach(b=>b.classList.toggle('active', wish.includes(id)));
+}
+function updateNavCounts(){
+  const cartCount = getCart().reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartNavBtn').setAttribute('data-count', cartCount);
+  document.getElementById('wishNavBtn').setAttribute('data-count', getWishlist().length);
+}
+
+let toastTimer;
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.innerHTML = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+/* ================= RENDER: PRODUCT CARD ================= */
+function productCard(p, seedOffset){
+  const wish = getWishlist();
+  const isWished = wish.includes(p.id);
+  return `
+  <div class="product-card" data-id="${p.id}">
+    <div class="product-media" onclick="navigateTo('#/product/${p.slug}')">
+      ${p.isBestSeller ? '<span class="badge">Best Seller</span>' : (p.isNewArrival ? '<span class="badge">New</span>' : '')}
+      ${p.discount > 0 ? `<span class="discount-badge">${p.discount}% OFF</span>` : ''}
+      ${ph(p.id+seedOffset, p.name[0])}
+      <button class="wish-btn ${isWished?'active':''}" data-id="${p.id}" onclick="event.stopPropagation(); toggleWishlist(${p.id})">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="${isWished?'#8C5049':'none'}" stroke="#2B2622" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8 2.5 4.5 6 4c2-.3 4 1 6 3.5C14 5 16-.3 18 4c3.5.5 5 4 3.5 8-2.5 4.5-9.5 9-9.5 9z"/></svg>
+      </button>
+      ${p.stock>0 ? `<button class="quick-add" onclick="event.stopPropagation(); addToCart(${p.id})">Quick Add</button>` : `<div class="quick-add" style="opacity:1;background:#A69C8E;">Out of Stock</div>`}
+    </div>
+    <div class="p-name" onclick="navigateTo('#/product/${p.slug}')">${p.name}</div>
+    <div class="p-desc">${p.category}</div>
+    <div class="p-rating"><span class="stars">${starString(p.rating)}</span> ${p.rating} (${p.reviewCount})</div>
+    <div class="p-price">₹${p.price}${p.originalPrice>p.price?` <span class="old">₹${p.originalPrice}</span> <span class="off">${p.discount}% OFF</span>`:''}</div>
+  </div>`;
+}
+function starString(r){
+  const full = Math.round(r);
+  return '★★★★★'.slice(0,full) + '☆☆☆☆☆'.slice(0, 5-full);
+}
+
+/* ================= HOME PAGE RENDER ================= */
+function renderHome(){
+  document.getElementById('catGrid').innerHTML = CATEGORIES.map((c,i)=>`
+    <div class="cat-card" onclick="navigateTo('#/shop?category=${encodeURIComponent(c)}')">
+      <div class="cat-ph" style="${phFlat(i)}"></div>
+      <span class="cat-label">${c}</span>
+    </div>`).join('');
+  document.getElementById('bestSellerGrid').innerHTML = PRODUCTS.filter(p=>p.isBestSeller).slice(0,5).map((p,i)=>productCard(p,i)).join('');
+  document.getElementById('newArrivalsCarousel').innerHTML = PRODUCTS.filter(p=>p.isNewArrival).map((p,i)=>productCard(p,i+5)).join('');
+  document.getElementById('instaGrid').innerHTML = Array.from({length:6}).map((_,i)=>`<div class="insta-item"><div class="insta-ph" style="${phFlat(i+2)}"></div></div>`).join('');
+}
+
+/* ================= SHOP PAGE ================= */
+let shopState = { category:new Set(), price:'all', skinType:new Set(), rating:0, inStock:false, sort:'featured', search:'', filter:'' };
+
+function parseQuery(hash){
+  const qIndex = hash.indexOf('?');
+  const params = {};
+  if(qIndex>-1){
+    new URLSearchParams(hash.slice(qIndex+1)).forEach((v,k)=>params[k]=v);
+  }
+  return params;
+}
+
+function renderShopFilters(){
+  document.getElementById('filterCategory').innerHTML = CATEGORIES.map(c=>`
+    <label class="filter-opt"><input type="checkbox" value="${c}" class="cat-filter" ${shopState.category.has(c)?'checked':''}> ${c}</label>`).join('');
+  document.getElementById('filterSkinType').innerHTML = SKIN_TYPES.map(s=>`
+    <label class="filter-opt"><input type="checkbox" value="${s}" class="skin-filter" ${shopState.skinType.has(s)?'checked':''}> ${s}</label>`).join('');
+
+  document.querySelectorAll('.cat-filter').forEach(cb=>cb.addEventListener('change', e=>{
+    if(e.target.checked) shopState.category.add(e.target.value); else shopState.category.delete(e.target.value);
+    renderShopGrid();
+  }));
+  document.querySelectorAll('.skin-filter').forEach(cb=>cb.addEventListener('change', e=>{
+    if(e.target.checked) shopState.skinType.add(e.target.value); else shopState.skinType.delete(e.target.value);
+    renderShopGrid();
+  }));
+  document.querySelectorAll('input[name="price"]').forEach(r=>r.addEventListener('change', e=>{ shopState.price=e.target.value; renderShopGrid(); }));
+  document.querySelectorAll('input[name="rating"]').forEach(r=>r.addEventListener('change', e=>{ shopState.rating=parseFloat(e.target.value); renderShopGrid(); }));
+  document.getElementById('filterInStock').addEventListener('change', e=>{ shopState.inStock=e.target.checked; renderShopGrid(); });
+  document.getElementById('clearFiltersBtn').addEventListener('click', ()=>{
+    shopState = { category:new Set(), price:'all', skinType:new Set(), rating:0, inStock:false, sort:'featured', search:'', filter:'' };
+    document.getElementById('sortSelect').value='featured';
+    renderShopFilters(); renderShopGrid();
+  });
+}
+
+function renderShopGrid(){
+  let list = PRODUCTS.slice();
+  if(shopState.search){
+    const q = shopState.search.toLowerCase();
+    list = list.filter(p=>p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q));
+  }
+  if(shopState.filter==='bestseller') list = list.filter(p=>p.isBestSeller);
+  if(shopState.filter==='new') list = list.filter(p=>p.isNewArrival);
+  if(shopState.category.size) list = list.filter(p=>shopState.category.has(p.category));
+  if(shopState.skinType.size) list = list.filter(p=>shopState.skinType.has(p.skinType));
+  if(shopState.price!=='all'){
+    const [min,max] = shopState.price.split('-').map(Number);
+    list = list.filter(p=>p.price>=min && p.price<=max);
+  }
+  if(shopState.rating) list = list.filter(p=>p.rating>=shopState.rating);
+  if(shopState.inStock) list = list.filter(p=>p.stock>0);
+
+  switch(shopState.sort){
+    case 'newest': list = list.filter(p=>p.isNewArrival).concat(list.filter(p=>!p.isNewArrival)); break;
+    case 'price-asc': list.sort((a,b)=>a.price-b.price); break;
+    case 'price-desc': list.sort((a,b)=>b.price-a.price); break;
+    case 'rating': list.sort((a,b)=>b.rating-a.rating); break;
+  }
+
+  document.getElementById('shopCount').textContent = `${list.length} product${list.length!==1?'s':''}`;
+  document.getElementById('shopGrid').innerHTML = list.map((p,i)=>productCard(p,i)).join('');
+  document.getElementById('shopEmpty').style.display = list.length ? 'none' : 'block';
+
+  const tags = [];
+  if(shopState.category.size) tags.push(...shopState.category);
+  if(shopState.search) tags.push(`"${shopState.search}"`);
+  document.getElementById('shopActiveFilters').textContent = tags.length ? `Filtered by: ${tags.join(', ')}` : '';
+}
+
+function initShopFromQuery(params){
+  shopState.category = new Set(params.category ? [params.category] : []);
+  shopState.filter = params.filter || '';
+  shopState.search = params.q || '';
+  document.getElementById('navSearchInput').value = shopState.search;
+  renderShopFilters();
+  renderShopGrid();
+}
+
+document.getElementById('sortSelect').addEventListener('change', e=>{ shopState.sort=e.target.value; renderShopGrid(); });
+document.getElementById('mobileFilterBtn').addEventListener('click', ()=>{
+  const panel = document.getElementById('filterPanel');
+  panel.style.display = panel.style.display==='block' ? 'none' : 'block';
+});
+document.getElementById('mobileSortBtn').addEventListener('click', ()=>{
+  const sel = document.getElementById('sortSelect');
+  const opts = ['featured','newest','price-asc','price-desc','rating'];
+  const next = opts[(opts.indexOf(sel.value)+1)%opts.length];
+  sel.value = next; shopState.sort=next; renderShopGrid();
+  showToast('Sorted: ' + sel.options[sel.selectedIndex].text);
+});
+
+/* ================= PRODUCT DETAIL PAGE ================= */
+let currentProduct = null, currentSize = null, currentQty = 1;
+
+function renderProductPage(slug){
+  const p = PRODUCTS.find(pr=>pr.slug===slug);
+  if(!p){ navigateTo('#/shop'); return; }
+  currentProduct = p; currentSize = p.sizes[0]; currentQty = 1;
+
+  document.getElementById('pdpBreadcrumb').innerHTML = `<a href="#/" data-nav data-route="home">Home</a> / <a href="#/shop" data-nav data-route="shop">Shop</a> / <span>${p.name}</span>`;
+  document.getElementById('pdpMainImg').innerHTML = ph(p.id, p.name[0]);
+  document.getElementById('pdpThumbs').innerHTML = Array.from({length:4}).map((_,i)=>`
+    <div class="pdp-thumb ${i===0?'active':''}" data-i="${i}" style="${phFlat(p.id+i)}"></div>`).join('');
+  document.querySelectorAll('.pdp-thumb').forEach(t=>t.addEventListener('click', ()=>{
+    document.querySelectorAll('.pdp-thumb').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('pdpMainImg').innerHTML = ph(p.id + parseInt(t.dataset.i), p.name[0]);
+  }));
+
+  document.getElementById('pdpInfo').innerHTML = `
+    <span class="eyebrow">${p.category}</span>
+    <h1>${p.name}</h1>
+    <div class="pdp-rating"><span class="stars">${starString(p.rating)}</span> ${p.rating} · ${p.reviewCount} reviews</div>
+    <div class="pdp-price">₹${p.price}${p.originalPrice>p.price?` <span class="old">₹${p.originalPrice}</span> <span class="off">${p.discount}% OFF</span>`:''}</div>
+    <p class="pdp-desc">${p.description}</p>
+    <div class="pdp-benefits">${p.benefits.map(b=>`<span>${b}</span>`).join('')}</div>
+    <div class="pdp-row">
+      <label>Size</label>
+      <div class="size-opts" id="sizeOpts">${p.sizes.map((s,i)=>`<div class="size-opt ${i===0?'active':''}" data-size="${s}">${s}</div>`).join('')}</div>
+    </div>
+    <div class="pdp-row">
+      <label>Quantity</label>
+      <div class="qty-selector">
+        <button id="qtyMinus">−</button><span id="qtyVal">1</span><button id="qtyPlus">+</button>
+      </div>
+    </div>
+    ${p.stock>0 ? (p.stock<15 ? `<div class="stock-note">Only ${p.stock} left in stock</div>` : '') : `<div class="stock-note" style="color:#8a5c5c">Out of Stock</div>`}
+    <div class="pdp-cta-row">
+      <button class="btn btn-outline" id="pdpAddCart" ${p.stock===0?'disabled':''}>Add to Cart</button>
+      <button class="btn btn-primary" id="pdpBuyNow" ${p.stock===0?'disabled':''}>Buy Now</button>
+      <button class="btn btn-outline" id="pdpWishBtn" style="flex:0;min-width:48px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="${getWishlist().includes(p.id)?'#8C5049':'none'}" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.5-9.5-9C1 8 2.5 4.5 6 4c2-.3 4 1 6 3.5C14 5 16-.3 18 4c3.5.5 5 4 3.5 8-2.5 4.5-9.5 9-9.5 9z"/></svg>
+      </button>
+    </div>
+    <div class="delivery-check">
+      <input type="text" id="pincodeCheck" placeholder="Enter pincode to check delivery" maxlength="6">
+      <button class="btn btn-outline btn-sm" id="checkDeliveryBtn">Check</button>
+    </div>
+    <div class="delivery-note" id="deliveryResult">Estimated delivery: 2–4 business days</div>
+    <div class="trust-row">
+      <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V7a4 4 0 018 0v4"/></svg> Secure Payment</div>
+      <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 16V8a2 2 0 012-2h9l5 5v5a2 2 0 01-2 2H6a2 2 0 01-2-2z"/></svg> Free Shipping ₹999+</div>
+      <div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg> Easy Returns</div>
+    </div>
+  `;
+
+  document.querySelectorAll('#sizeOpts .size-opt').forEach(el=>el.addEventListener('click', ()=>{
+    document.querySelectorAll('#sizeOpts .size-opt').forEach(x=>x.classList.remove('active'));
+    el.classList.add('active'); currentSize = el.dataset.size;
+  }));
+  document.getElementById('qtyMinus').addEventListener('click', ()=>{ if(currentQty>1){ currentQty--; document.getElementById('qtyVal').textContent=currentQty; } });
+  document.getElementById('qtyPlus').addEventListener('click', ()=>{ currentQty++; document.getElementById('qtyVal').textContent=currentQty; });
+  document.getElementById('pdpAddCart').addEventListener('click', ()=> addToCart(p.id, currentSize, currentQty));
+  document.getElementById('pdpBuyNow').addEventListener('click', ()=>{ addToCart(p.id, currentSize, currentQty); navigateTo('#/checkout'); });
+  document.getElementById('pdpWishBtn').addEventListener('click', ()=>{ toggleWishlist(p.id); renderProductPage(slug); });
+  document.getElementById('checkDeliveryBtn').addEventListener('click', ()=>{
+    const val = document.getElementById('pincodeCheck').value.trim();
+    document.getElementById('deliveryResult').textContent = /^\d{6}$/.test(val) ? `Delivering to ${val}: 2–4 business days` : 'Please enter a valid 6-digit pincode';
+  });
+
+  document.getElementById('tab-desc').innerHTML = `<p>${p.description}</p>`;
+  document.getElementById('tab-ingredients').innerHTML = `<ul>${p.ingredients.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+  document.getElementById('tab-howto').innerHTML = `<p>Apply a small amount to clean, dry skin ${p.category==='Hair Care'?'or hair':''}. Use ${p.category==='Skincare'?'morning and night':'as needed'} for best results. Follow with sunscreen during the day.</p>`;
+  document.getElementById('tab-reviews').innerHTML = `
+    <div class="review-grid" style="grid-template-columns:1fr 1fr;">
+      <div class="review-card"><span class="stars">${starString(p.rating)}</span><p>"Exactly what my routine was missing. Will repurchase."</p><div class="reviewer"><span class="name">Verified Customer <span class="verified">Verified Buyer</span></span></div></div>
+      <div class="review-card"><span class="stars">★★★★☆</span><p>"Good quality, gentle, and a little goes a long way."</p><div class="reviewer"><span class="name">Verified Customer <span class="verified">Verified Buyer</span></span></div></div>
+    </div>`;
+  document.getElementById('tab-faq').innerHTML = `
+    <div class="faq-item"><div class="faq-q">Is this suitable for sensitive skin? <span>+</span></div><div class="faq-a">Yes, this formula is dermatologically tested and free from common irritants, but we always recommend a patch test first.</div></div>
+    <div class="faq-item"><div class="faq-q">How long does one bottle last? <span>+</span></div><div class="faq-a">With regular use, one unit typically lasts 6–8 weeks depending on frequency of application.</div></div>
+    <div class="faq-item"><div class="faq-q">What is the return policy? <span>+</span></div><div class="faq-a">Unopened products can be returned within 15 days of delivery for a full refund.</div></div>`;
+  document.querySelectorAll('.faq-item').forEach(item=>item.querySelector('.faq-q').addEventListener('click', ()=>item.classList.toggle('open')));
+
+  document.getElementById('relatedGrid').innerHTML = PRODUCTS.filter(rp=>rp.category===p.category && rp.id!==p.id).slice(0,5).map((rp,i)=>productCard(rp,i)).join('');
+
+  document.getElementById('stickyPrice').innerHTML = `₹${p.price}`;
+  document.getElementById('stickyAddBtn').onclick = ()=> addToCart(p.id, currentSize, currentQty);
+  document.getElementById('stickyAddBtn').disabled = p.stock===0;
+}
+
+document.getElementById('pdpTabs').addEventListener('click', e=>{
+  const tab = e.target.closest('.pdp-tab');
+  if(!tab) return;
+  document.querySelectorAll('.pdp-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.pdp-tab-content').forEach(c=>c.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+});
+
+/* ================= CART PAGE ================= */
+const COUPONS = { 'TAGVIX10': 0.10, 'TAGVIX20': 0.20 };
+let appliedCoupon = null;
+
+function cartLines(){
+  return getCart().map(item=>({ ...item, product: PRODUCTS.find(p=>p.id===item.id) })).filter(l=>l.product);
+}
+function cartTotals(){
+  const lines = cartLines();
+  const subtotal = lines.reduce((s,l)=>s + l.product.price*l.qty, 0);
+  const shipping = subtotal >= 999 || subtotal===0 ? 0 : 79;
+  const discount = appliedCoupon ? Math.round(subtotal*appliedCoupon) : 0;
+  const total = subtotal + shipping - discount;
+  return {subtotal, shipping, discount, total};
+}
+
+function renderCartPage(){
+  const lines = cartLines();
+  const el = document.getElementById('cartContent');
+  if(!lines.length){
+    el.innerHTML = `<div class="empty-state">
+      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#2B2622" stroke-width="1.4"><path d="M4 8h16l-1.5 11a2 2 0 01-2 1.7H7.5a2 2 0 01-2-1.7L4 8z"/><path d="M8 8V6a4 4 0 018 0v2"/></svg>
+      <p>Your cart is empty. Let's find something you'll love.</p>
+      <a href="#/shop" data-nav data-route="shop" class="btn btn-primary">Continue Shopping</a>
+    </div>`;
+    document.getElementById('cartRecsSection').style.display='none';
+    bindNavLinks();
+    return;
+  }
+  const {subtotal, shipping, discount, total} = cartTotals();
+  el.innerHTML = `
+    <div class="cart-layout">
+      <div>
+        ${lines.map(l=>`
+          <div class="cart-item">
+            <div class="cart-item-img" style="${phFlat(l.product.id)};border-radius:4px;"></div>
+            <div>
+              <div class="cart-item-name">${l.product.name}</div>
+              <div class="cart-item-meta">Size: ${l.size}</div>
+              <div class="cart-item-actions">
+                <div class="qty-selector">
+                  <button onclick="updateCartQty(${l.id},'${l.size}',-1)">−</button><span>${l.qty}</span><button onclick="updateCartQty(${l.id},'${l.size}',1)">+</button>
+                </div>
+                <span class="cart-item-remove" onclick="removeFromCart(${l.id},'${l.size}')">Remove</span>
+                <span class="cart-item-remove" style="color:var(--charcoal-soft);" onclick="toggleWishlist(${l.id})">Move to Wishlist</span>
+              </div>
+            </div>
+            <div class="cart-item-price">₹${l.product.price*l.qty}</div>
+          </div>`).join('')}
+      </div>
+      <div class="cart-summary">
+        <h3>Order Summary</h3>
+        <div class="coupon-row">
+          <input type="text" id="couponInput" placeholder="Coupon code (try TAGVIX10)">
+          <button class="btn btn-outline btn-sm" id="applyCouponBtn">Apply</button>
+        </div>
+        <div class="coupon-msg" id="couponMsg"></div>
+        <div class="summary-row"><span>Subtotal</span><span>₹${subtotal}</span></div>
+        <div class="summary-row"><span>Shipping</span><span>${shipping===0?'Free':'₹'+shipping}</span></div>
+        ${discount>0?`<div class="summary-row"><span>Discount</span><span class="disc">−₹${discount}</span></div>`:''}
+        <div class="summary-row total"><span>Total</span><span>₹${total}</span></div>
+        <a href="#/checkout" data-nav data-route="checkout" class="btn btn-primary" style="width:100%;margin-top:10px;">Proceed to Checkout</a>
+      </div>
+    </div>`;
+  document.getElementById('applyCouponBtn').addEventListener('click', ()=>{
+    const code = document.getElementById('couponInput').value.trim().toUpperCase();
+    const msg = document.getElementById('couponMsg');
+    if(COUPONS[code]){ appliedCoupon = COUPONS[code]; msg.textContent = `Coupon applied: ${code} (${COUPONS[code]*100}% off)`; msg.className='coupon-msg ok'; }
+    else { appliedCoupon = null; msg.textContent = 'Invalid coupon code'; msg.className='coupon-msg err'; }
+    renderCartPage();
+  });
+
+  document.getElementById('cartRecsSection').style.display='block';
+  const cartIds = lines.map(l=>l.id);
+  document.getElementById('cartRecsGrid').innerHTML = PRODUCTS.filter(p=>!cartIds.includes(p.id)).slice(0,5).map((p,i)=>productCard(p,i)).join('');
+  bindNavLinks();
+}
+
+/* ================= CHECKOUT PAGE ================= */
+function renderCheckoutPage(){
+  const lines = cartLines();
+  if(!lines.length){ navigateTo('#/cart'); return; }
+  const {subtotal, shipping, discount, total} = cartTotals();
+  document.getElementById('checkoutItems').innerHTML = lines.map(l=>`
+    <div class="mini-item">
+      <div class="mini-thumb" style="${phFlat(l.product.id)}"></div>
+      <div><div class="mini-item-name">${l.product.name}</div><div class="mini-item-meta">${l.size} × ${l.qty}</div></div>
+      <div class="mini-item-price">₹${l.product.price*l.qty}</div>
+    </div>`).join('');
+  document.getElementById('coSubtotal').textContent = `₹${subtotal}`;
+  document.getElementById('coShipping').textContent = shipping===0?'Free':`₹${shipping}`;
+  if(discount>0){ document.getElementById('coDiscountRow').style.display='flex'; document.getElementById('coDiscount').textContent = `−₹${discount}`; }
+  else document.getElementById('coDiscountRow').style.display='none';
+  document.getElementById('coTotal').textContent = `₹${total}`;
+}
+
+document.querySelectorAll('#paymentOpts .pay-opt').forEach(opt=>opt.addEventListener('click', ()=>{
+  document.querySelectorAll('#paymentOpts .pay-opt').forEach(o=>o.classList.remove('active'));
+  opt.classList.add('active');
+}));
+
+document.getElementById('checkoutForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const lines = cartLines();
+  if(!lines.length) return;
+  const {subtotal, shipping, discount, total} = cartTotals();
+  const orderNum = 'TGX' + Math.floor(100000 + Math.random()*900000);
+  const deliveryDate = new Date(Date.now() + 4*24*60*60*1000).toLocaleDateString('en-IN', {day:'numeric', month:'long', year:'numeric'});
+
+  document.getElementById('successOrderNum').textContent = `Order #${orderNum}`;
+  document.getElementById('successDelivery').textContent = deliveryDate;
+  document.getElementById('successSummary').innerHTML = `
+    ${lines.map(l=>`<div class="mini-item"><div class="mini-thumb" style="${phFlat(l.product.id)}"></div><div><div class="mini-item-name">${l.product.name}</div><div class="mini-item-meta">${l.size} × ${l.qty}</div></div><div class="mini-item-price">₹${l.product.price*l.qty}</div></div>`).join('')}
+    <div class="summary-row" style="margin-top:14px;"><span>Subtotal</span><span>₹${subtotal}</span></div>
+    <div class="summary-row"><span>Shipping</span><span>${shipping===0?'Free':'₹'+shipping}</span></div>
+    ${discount>0?`<div class="summary-row"><span>Discount</span><span class="disc">−₹${discount}</span></div>`:''}
+    <div class="summary-row total"><span>Total Paid</span><span>₹${total}</span></div>`;
+
+  setCart([]); appliedCoupon = null;
+  navigateTo('#/success');
+});
+
+/* ================= SEARCH ================= */
+const searchInput = document.getElementById('navSearchInput');
+const searchSuggest = document.getElementById('searchSuggest');
+searchInput.addEventListener('input', ()=>{
+  const q = searchInput.value.trim().toLowerCase();
+  if(!q){ searchSuggest.classList.remove('show'); return; }
+  const matches = PRODUCTS.filter(p=>p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q)).slice(0,6);
+  if(!matches.length){ searchSuggest.innerHTML = `<div class="s-item">No products found</div>`; }
+  else{
+    searchSuggest.innerHTML = matches.map(p=>`
+      <div class="s-item" onclick="navigateTo('#/product/${p.slug}')">
+        <div class="s-thumb" style="${phFlat(p.id)};border-radius:4px;"></div>
+        <div>${p.name}<div style="color:var(--charcoal-soft);font-size:10.5px;">₹${p.price} · ${p.category}</div></div>
+      </div>`).join('');
+  }
+  searchSuggest.classList.add('show');
+});
+searchInput.addEventListener('keydown', e=>{
+  if(e.key==='Enter'){ navigateTo('#/shop?q=' + encodeURIComponent(searchInput.value.trim())); searchSuggest.classList.remove('show'); }
+});
+document.addEventListener('click', e=>{ if(!e.target.closest('.nav-search')) searchSuggest.classList.remove('show'); });
+
+/* ================= NEWSLETTER ================= */
+document.getElementById('newsletterForm').addEventListener('submit', e=>{
+  e.preventDefault(); showToast('Thanks for subscribing! Check your inbox for 10% off.'); e.target.reset();
+});
+
+/* ================= ROUTER ================= */
+function bindNavLinks(){
+  document.querySelectorAll('[data-nav]').forEach(el=>{
+    el.onclick = (e)=>{ e.preventDefault(); navigateTo(el.getAttribute('href')); };
+  });
+}
+function navigateTo(hash){ window.location.hash = hash; }
+
+function setActiveNav(route){
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.toggle('active', a.dataset.route===route));
+}
+
+function router(){
+  const hash = window.location.hash || '#/';
+  const path = hash.split('?')[0];
+  const params = parseQuery(hash);
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('stickyCartMobile').classList.remove('show');
+  window.scrollTo(0,0);
+
+  if(path === '#/' ){
+    document.getElementById('page-home').classList.add('active');
+    setActiveNav('home'); renderHome();
+  } else if(path === '#/shop'){
+    document.getElementById('page-shop').classList.add('active');
+    setActiveNav('shop'); initShopFromQuery(params);
+  } else if(path.startsWith('#/product/')){
+    document.getElementById('page-product').classList.add('active');
+    setActiveNav('');
+    renderProductPage(path.replace('#/product/',''));
+    if(window.innerWidth<=760) document.getElementById('stickyCartMobile').classList.add('show');
+  } else if(path === '#/cart'){
+    document.getElementById('page-cart').classList.add('active');
+    setActiveNav('cart'); renderCartPage();
+  } else if(path === '#/checkout'){
+    document.getElementById('page-checkout').classList.add('active');
+    setActiveNav(''); renderCheckoutPage();
+  } else if(path === '#/success'){
+    document.getElementById('page-success').classList.add('active');
+    setActiveNav('');
+  } else {
+    document.getElementById('page-home').classList.add('active'); setActiveNav('home'); renderHome();
+  }
+  bindNavLinks();
+}
+window.addEventListener('hashchange', router);
+window.addEventListener('DOMContentLoaded', ()=>{ bindNavLinks(); updateNavCounts(); router(); });
+</script>
+</body>
+</html>
